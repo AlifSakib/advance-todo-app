@@ -19,11 +19,13 @@ const fetchTodoMiddleware = (store) => (next) => async (action) => {
     const response = await fetch(
       "https://jsonplaceholder.typicode.com/todos?_limit=5"
     );
-    const todos = (aawait = response.json());
+    const todos = await response.json();
     store.dispatch({
       type: "todos/todoLoaded",
       payload: todos,
     });
+
+    console.log(`number of update todos : ${store.getState().todos.length}`);
 
     return;
   }
@@ -33,4 +35,5 @@ const fetchTodoMiddleware = (store) => (next) => async (action) => {
 
 module.exports = {
   delayActionsMiddleware,
+  fetchTodoMiddleware,
 };
