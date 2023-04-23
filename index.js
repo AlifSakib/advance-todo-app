@@ -1,3 +1,5 @@
+const { createStore } = require("redux");
+
 // initialState
 
 const initialState = {
@@ -29,3 +31,19 @@ const todoReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+//store
+const store = createStore(todoReducer);
+
+// subscribe to state changes
+
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
+// dispatch actions
+
+store.dispatch({
+  type: "todos/todoAdded",
+  payload: "Learn about actions",
+});
